@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RAJ ELECTRIC | Management System</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#090d12;
+  color:#fff
+}
+
+.header{
+  padding:18px 20px;
+  background:#11161d;
+  border-bottom:4px solid #ffc400;
+  position:sticky;
+  top:0;
+  z-index:10
+}
+
+.logo{
+  font-size:27px;
+  font-weight:bold
+}
+
+.logo span,
+h2,
+.hero h1 span{
+  color:#ffc400
+}
+
+.container{
+  width:94%;
+  max-width:950px;
+  margin:25px auto
+}
+
+.hero,
+.card,
+.stat,
+.person,
+.item-box,
+.file-card,
+.contact-box{
+  background:#151a20;
+  border:1px solid #303943;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px
+}
+
+.hero{
+  background:linear-gradient(145deg,#151b22,#0d1218)
+}
+
+.hero h1{
+  margin-top:0;
+  font-size:30px
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border-radius:10px;
+  border:1px solid #39414b;
+  background:#090d12;
+  color:#fff;
+  font-size:16px
+}
+
+textarea{
+  min-height:90px
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:bold;
+  cursor:pointer
+}
+
+button:disabled{
+  opacity:.5
+}
+
+.login-btn,
+.save-btn{
+  width:100%;
+  background:#ffc400;
+  color:#111;
+  margin-top:8px
+}
+
+.logout-btn{
+  background:#6a2020;
+  color:white;
+  float:right
+}
+
+.upload-btn{
+  background:#075c35;
+  color:white;
+  width:100%;
+  margin-top:8px
+}
+
+.delete-btn{
+  background:#702020;
+  color:white
+}
+
+.view-btn{
+  background:#6b4b0a;
+  color:white
+}
+
+.cancel-btn{
+  background:#444;
+  color:white
+}
+
+.actions,
+.tabs,
+.public-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px
+}
+
+.tab-btn,
+.public-nav button{
+  background:#252d36;
+  color:white
+}
+
+.tab-btn.active,
+.public-nav button.active{
+  background:#ffc400;
+  color:#111
+}
+
+.hidden{
+  display:none!important
+}
+
+.section{
+  display:none
+}
+
+.section.active{
+  display:block
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px
+}
+
+.stat h3{
+  margin:0;
+  color:#aaa
+}
+
+.number{
+  font-size:38px;
+  color:#ffc400;
+  font-weight:bold
+}
+
+.person-name,
+.item-title{
+  font-size:20px;
+  font-weight:bold
+}
+
+.details{
+  color:#bbb;
+  line-height:1.8;
+  margin-top:8px
+}
+
+.status{
+  display:inline-block;
+  padding:5px 12px;
+  border-radius:20px;
+  margin-top:8px;
+  font-size:13px
+}
+
+.available{
+  background:#403410;
+  color:#ffd52c
+}
+
+.working{
+  background:#0d3b26;
+  color:#3ce58a
+}
+
+.completed{
+  background:#123c5b;
+  color:#55baff
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px
+}
+
+.gallery-item{
+  background:#10151a;
+  border:1px solid #303943;
+  border-radius:15px;
+  overflow:hidden
+}
+
+.gallery-item img,
+.gallery-item video{
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
+  display:block
+}
+
+.gallery-info{
+  padding:12px
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px
+}
+
+.success-box{
+  background:#123a24;
+  color:#45e28b;
+  border:1px solid #17633d;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px
+}
+
+.error-box{
+  background:#431919;
+  color:#ff8585;
+  border:1px solid #702020;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px
+}
+
+.empty{
+  text-align:center;
+  color:#888;
+  padding:25px
+}
+
+.loading{
+  text-align:center;
+  color:#aaa;
+  padding:20px
+}
+
+.progress{
+  height:10px;
+  background:#303943;
+  border-radius:20px;
+  margin-top:10px;
+  overflow:hidden
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:#ffc400
+}
+
+.small{
+  color:#888;
+  font-size:13px;
+  margin-top:5px;
+  word-break:break-all
+}
+
+@media(max-width:700px){
+  .stats,
+  .contact-grid,
+  .gallery{
+    grid-template-columns:1fr
+  }
+
+  .hero h1{
+    font-size:26px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="homePage">
+
+<header class="header">
+  <div class="logo">⚡ <span>RAJ</span> ELECTRIC</div>
+</header>
+
+<div class="container">
+
+<div class="hero">
+  <h1>RAJ ELECTRIC <span>Company</span></h1>
+
+  <p>
+    Professional Electrical Services, Projects,
+    Work Orders & Work Completion Certificates.
+  </p>
+
+  <div class="actions">
+    <button onclick="location.href='tel:9898612342'">
+      📞 Call Now
+    </button>
+
+    <button onclick="window.open('https://wa.me/919898612342','_blank')">
+      💬 WhatsApp
+    </button>
+
+    <button onclick="showLogin()">
+      🔐 Admin Login
+    </button>
+  </div>
+</div>
+
+<div class="card">
+
+<h2>🏢 RAJ ELECTRIC</h2>
+
+<div class="contact-grid">
+
+<div class="contact-box">
+📞 <b>Mobile</b>
+<br><br>
+9898612342
+</div>
+
+<div class="contact-box">
+📍 <b>Address</b>
+<br><br>
+S.D.X South 81,
+<br>
+Zhanda Chowk,
+<br>
+Gandhidham, Kutch
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<div class="public-nav">
+
+<button
+id="publicPhotoBtn"
+class="active"
+onclick="showPublicGallery('photos')">
+📸 Photos
+</button>
+
+<button
+id="publicVideoBtn"
+onclick="showPublicGallery('videos')">
+🎥 Videos
+</button>
+
+<button
+id="publicCertBtn"
+onclick="showPublicGallery('certificates')">
+🏆 Certificates
+</button>
+
+</div>
+
+<div id="publicPhotos">
+  <div class="loading">📸 Photos loading...</div>
+</div>
+
+<div id="publicVideos" class="hidden"></div>
+
+<div id="publicCertificates" class="hidden"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- LOGIN -->
+<div id="loginScreen" class="container hidden">
+
+<div class="card" style="max-width:500px;margin:60px auto">
+
+<h1 style="text-align:center">
+⚡ RAJ ELECTRIC
+<br>
+<span style="color:#ffc400">Admin Login</span>
+</h1>
+
+<input
+id="email"
+type="email"
+placeholder="Admin Email">
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<button
+class="login-btn"
+id="loginBtn">
+🔐 Login
+</button>
+
+<button
+class="cancel-btn"
+style="width:100%;margin-top:8px"
+onclick="showHome()">
+← Back
+</button>
+
+<div id="loginError"></div>
+
+</div>
+</div>
+
+
+<!-- ADMIN -->
+<div id="adminPanel" class="hidden">
+
+<header class="header">
+
+<div class="logo">
+⚡ <span>RAJ</span> ELECTRIC
+
+<button
+class="logout-btn"
+id="logoutBtn">
+Logout
+</button>
+
+</div>
+</header>
+
+<div class="container">
+
+<div class="hero">
+
+<h1>
+RAJ ELECTRIC
+<span>Management System</span>
+</h1>
+
+<p>
+Electricians, Projects, Work Orders,
+Photos, Videos & Certificates
+</p>
+
+</div>
+
+
+<!-- TABS -->
+
+<div class="tabs">
+
+<button
+class="tab-btn active"
+data-tab="electricianSection">
+👷 Electricians
+</button>
+
+<button
+class="tab-btn"
+data-tab="projectSection">
+📁 Projects
+</button>
+
+<button
+class="tab-btn"
+data-tab="workOrderSection">
+📄 Work Orders
+</button>
+
+<button
+class="tab-btn"
+data-tab="certificateSection">
+🏆 Certificates
+</button>
+
+<button
+class="tab-btn"
+data-tab="mediaSection">
+📸 Photos / Videos
+</button>
+
+</div>
+
+
+<!-- ELECTRICIANS -->
+
+<div
+id="electricianSection"
+class="section active">
+
+<div class="stats">
+
+<div class="stat">
+<h3>Total Electricians</h3>
+<div
+class="number"
+id="totalCount">
+0
+</div>
+</div>
+
+<div class="stat">
+<h3>Working</h3>
+<div
+class="number"
+id="workingCount">
+0
+</div>
+</div>
+
+<div class="stat">
+<h3>Completed</h3>
+<div
+class="number"
+id="completedCount">
+0
+</div>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>➕ Add Electrician</h2>
+
+<input
+id="name"
+placeholder="Electrician Name">
+
+<input
+id="phone"
+placeholder="Mobile Number">
+
+<input
+id="work"
+placeholder="Current Work / Location">
+
+<select id="status">
+
+<option>Available</option>
+<option>Working</option>
+<option>Completed</option>
+
+</select>
+
+<button
+class="save-btn"
+id="saveElectricianBtn">
+➕ Add Electrician
+</button>
+
+<div id="electricianMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>👷 Electrician Live Data</h2>
+
+<div id="electricianList">
+<div class="loading">
+Data loading...
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROJECTS -->
+
+<div
+id="projectSection"
+class="section">
+
+<div class="card">
+
+<h2>📁 Add Project</h2>
+
+<input
+id="companyName"
+placeholder="Company Name">
+
+<input
+id="projectName"
+placeholder="Project Name">
+
+<input
+id="projectLocation"
+placeholder="Project Location">
+
+<input
+id="projectDate"
+type="date">
+
+<textarea
+id="projectDescription"
+placeholder="Project Description"></textarea>
+
+<button
+class="save-btn"
+id="saveProjectBtn">
+➕ Save Project
+</button>
+
+<div id="projectMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📁 Project List</h2>
+
+<div id="projectList"></div>
+
+</div>
+
+</div>
+
+
+<!-- WORK ORDERS -->
+
+<div
+id="workOrderSection"
+class="section">
+
+<div class="card">
+
+<h2>📄 Add Work Order</h2>
+
+<input
+id="woCompanyName"
+placeholder="Company Name">
+
+<input
+id="woProjectName"
+placeholder="Project Name">
+
+<input
+id="orderNumber"
+placeholder="Work Order Number">
+
+<input
+id="woLocation"
+placeholder="Location">
+
+<input
+id="woDate"
+type="date">
+
+<input
+id="pdfUrl"
+placeholder="PDF Link / URL">
+
+<textarea
+id="woDescription"
+placeholder="Work Order Description"></textarea>
+
+<button
+class="save-btn"
+id="saveWorkOrderBtn">
+💾 Save Work Order
+</button>
+
+<div id="workOrderMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📄 Work Order List</h2>
+
+<div id="workOrderList"></div>
+
+</div>
+
+</div>
+
+
+<!-- CERTIFICATES -->
+
+<div
+id="certificateSection"
+class="section">
+
+<div class="card">
+
+<h2>🏆 Add Work Completion Certificate</h2>
+
+<input
+id="certCompanyName"
+placeholder="Company Name">
+
+<input
+id="certProjectName"
+placeholder="Project Name">
+
+<input
+id="certificateNumber"
+placeholder="Certificate Number">
+
+<input
+id="certDate"
+type="date">
+
+<input
+id="certificateFileUrl"
+placeholder="Certificate File / PDF URL">
+
+<textarea
+id="certDescription"
+placeholder="Certificate Description"></textarea>
+
+<button
+class="save-btn"
+id="saveCertificateBtn">
+💾 Save Certificate
+</button>
+
+<div id="certificateMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🏆 Certificate List</h2>
+
+<div id="certificateList"></div>
+
+</div>
+
+</div>
+
+
+<!-- MEDIA -->
+
+<div
+id="mediaSection"
+class="section">
+
+
+<div class="card">
+
+<h2>📸 Upload Photo</h2>
+
+<input
+id="photoTitle"
+placeholder="Photo Title">
+
+<input
+id="photoFile"
+type="file"
+accept="image/*">
+
+<button
+class="upload-btn"
+id="uploadPhotoBtn">
+📸 Upload Photo
+</button>
+
+<div id="photoUploadStatus"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🎥 Upload Video</h2>
+
+<input
+id="videoTitle"
+placeholder="Video Title">
+
+<input
+id="videoFile"
+type="file"
+accept="video/*">
+
+<button
+class="upload-btn"
+id="uploadVideoBtn">
+🎥 Upload Video
+</button>
+
+<div id="videoUploadStatus"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🏆 Upload Certificate</h2>
+
+<input
+id="uploadCertTitle"
+placeholder="Certificate Title">
+
+<input
+id="certificateFile"
+type="file"
+accept=".pdf,.jpg,.jpeg,.png">
+
+<button
+class="upload-btn"
+id="uploadCertificateBtn">
+🏆 Upload Certificate
+</button>
+
+<div id="certificateUploadStatus"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📂 Uploaded Media</h2>
+
+<div id="adminMediaList"></div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<script type="module">
+
+/* =========================
+   FIREBASE
+========================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyAcNM2ldmg7FnJyDqt2Z7k4W6wdHffjadM",
+
+  authDomain:
+  "raj-electric-feb5c.firebaseapp.com",
+
+  projectId:
+  "raj-electric-feb5c",
+
+  storageBucket:
+  "raj-electric-feb5c.firebasestorage.app",
+
+  messagingSenderId:
+  "172363858364",
+
+  appId:
+  "1:172363858364:web:d4685165adda707f9e6bb9"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================
+   CLOUDINARY
+========================= */
+
+const CLOUD_NAME = "bnbbduli";
+
+const UPLOAD_PRESET = "RAJ-ELECTRIC";
+
+
+/* =========================
+   FIRESTORE COLLECTIONS
+========================= */
+
+const electriciansRef =
+  collection(db,"electricians");
+
+const projectsRef =
+  collection(db,"projects");
+
+const workOrdersRef =
+  collection(db,"workOrders");
+
+const certificatesRef =
+  collection(db,"certificates");
+
+const mediaRef =
+  collection(db,"media");
+
+
+/* =========================
+   DOM ELEMENTS
+========================= */
+
+const homePage =
+  document.getElementById("homePage");
+
+const loginScreen =
+  document.getElementById("loginScreen");
+
+const adminPanel =
+  document.getElementById("adminPanel");
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const loginError =
+  document.getElementById("loginError");
+
+
+/* =========================
+   PAGE FUNCTIONS
+========================= */
+
+window.showLogin = () => {
+
+  homePage.classList.add("hidden");
+
+  loginScreen.classList.remove("hidden");
+
+  adminPanel.classList.add("hidden");
+
+};
+
+
+window.showHome = () => {
+
+  homePage.classList.remove("hidden");
+
+  loginScreen.classList.add("hidden");
+
+  adminPanel.classList.add("hidden");
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginBtn.onclick = async () => {
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  loginError.className = "";
+  loginError.textContent = "";
+
+  if(!email || !password){
+
+    loginError.className = "error-box";
+
+    loginError.textContent =
+      "Email और Password डालें।";
+
+    return;
+  }
+
+  loginBtn.disabled = true;
+
+  loginBtn.textContent =
+    "⏳ Login हो रहा है...";
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(e){
+
+    console.error(
+      "LOGIN ERROR:",
+      e.code,
+      e.message
+    );
+
+    loginError.className =
+      "error-box";
+
+    loginError.textContent =
+      "Login Error: " +
+      e.message;
+
+  }finally{
+
+    loginBtn.disabled = false;
+
+    loginBtn.textContent =
+      "🔐 Login";
+  }
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.onclick = async () => {
+
+  try{
+
+    await signOut(auth);
+
+    showHome();
+
+  }catch(e){
+
+    alert(
+      "Logout Error: " +
+      e.message
+    );
+
+  }
+
+};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(user){
+
+      homePage.classList.add("hidden");
+
+      loginScreen.classList.add("hidden");
+
+      adminPanel.classList.remove("hidden");
+
+    }else{
+
+      adminPanel.classList.add("hidden");
+
+    }
+
+  }
+);
+
+
+/* =========================
+   ADMIN TABS
+========================= */
+
+document
+.querySelectorAll(".tab-btn")
+.forEach(button => {
+
+  button.onclick = () => {
+
+    document
+    .querySelectorAll(".tab-btn")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+    document
+    .querySelectorAll(".section")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    document
+    .getElementById(button.dataset.tab)
+    .classList.add("active");
+
+  };
+
+});
+
+
+/* =========================
+   PUBLIC GALLERY TABS
+========================= */
+
+window.showPublicGallery = type => {
+
+  const sections = [
+    "publicPhotos",
+    "publicVideos",
+    "publicCertificates"
+  ];
+
+  sections.forEach(id => {
+
+    document
+    .getElementById(id)
+    .classList.add("hidden");
+
+  });
+
+
+  const buttons = [
+    "publicPhotoBtn",
+    "publicVideoBtn",
+    "publicCertBtn"
+  ];
+
+  buttons.forEach(id => {
+
+    document
+    .getElementById(id)
+    .classList.remove("active");
+
+  });
+
+
+  const sectionMap = {
+
+    photos:
+      "publicPhotos",
+
+    videos:
+      "publicVideos",
+
+    certificates:
+      "publicCertificates"
+
+  };
+
+
+  const buttonMap = {
+
+    photos:
+      "publicPhotoBtn",
+
+    videos:
+      "publicVideoBtn",
+
+    certificates:
+      "publicCertBtn"
+
+  };
+
+
+  document
+  .getElementById(sectionMap[type])
+  .classList.remove("hidden");
+
+
+  document
+  .getElementById(buttonMap[type])
+  .classList.add("active");
+
+};
+
+
+/* =========================
+   GENERIC SAVE
+========================= */
+
+async function save(
+  ref,
+  data,
+  msgId
+){
+
+  if(!auth.currentUser){
+
+    alert(
+      "पहले Admin Login करें।"
+    );
+
+    return;
+  }
+
+
+  try{
+
+    await addDoc(
+      ref,
+      {
+        ...data,
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    document
+    .getElementById(msgId)
+    .innerHTML =
+      '<div class="success-box">✅ Successfully saved.</div>';
+
+
+  }catch(e){
+
+    document
+    .getElementById(msgId)
+    .innerHTML =
+      '<div class="error-box">❌ ' +
+      esc(e.message) +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================
+   ELECTRICIAN
+========================= */
+
+document
+.getElementById("saveElectricianBtn")
+.onclick = () => {
+
+  save(
+
+    electriciansRef,
+
+    {
+
+      name:
+        document
+        .getElementById("name")
+        .value
+        .trim(),
+
+      phone:
+        document
+        .getElementById("phone")
+        .value
+        .trim(),
+
+      work:
+        document
+        .getElementById("work")
+        .value
+        .trim(),
+
+      status:
+        document
+        .getElementById("status")
+        .value
+
+    },
+
+    "electricianMessage"
+
+  );
+
+};
+
+
+onSnapshot(
+  electriciansRef,
+  snapshot => {
+
+    const list =
+      document
+      .getElementById("electricianList");
+
+    list.innerHTML = "";
+
+    let working = 0;
+
+    let completed = 0;
+
+
+    snapshot.forEach(item => {
+
+      const data =
+        item.data();
+
+
+      if(data.status === "Working"){
+        working++;
+      }
+
+      if(data.status === "Completed"){
+        completed++;
+      }
+
+
+      list.innerHTML += `
+
+      <div class="person">
+
+        <div class="person-name">
+          ${esc(data.name)}
+        </div>
+
+        <div class="details">
+
+          📞 ${esc(data.phone || "-")}
+          <br>
+
+          📍 ${esc(data.work || "-")}
+
+        </div>
+
+        <span class="status ${
+          data.status === "Working"
+            ? "working"
+            : data.status === "Completed"
+            ? "completed"
+            : "available"
+        }">
+
+          ${esc(data.status)}
+
+        </span>
+
+        <div class="actions">
+
+          <button
+          class="delete-btn"
+          onclick="del('electricians','${item.id}')">
+
+            🗑 Delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    });
+
+
+    document
+    .getElementById("totalCount")
+    .textContent =
+      snapshot.size;
+
+
+    document
+    .getElementById("workingCount")
+    .textContent =
+      working;
+
+
+    document
+    .getElementById("completedCount")
+    .textContent =
+      completed;
+
+
+    if(!snapshot.size){
+
+      list.innerHTML =
+        '<div class="empty">No electricians added.</div>';
+
+    }
+
+  }
+);
+
+
+/* =========================
+   PROJECT
+========================= */
+
+document
+.getElementById("saveProjectBtn")
+.onclick = () => {
+
+  save(
+
+    projectsRef,
+
+    {
+
+      companyName:
+        document
+        .getElementById("companyName")
+        .value
+        .trim(),
+
+      projectName:
+        document
+        .getElementById("projectName")
+        .value
+        .trim(),
+
+      location:
+        document
+        .getElementById("projectLocation")
+        .value
+        .trim(),
+
+      date:
+        document
+        .getElementById("projectDate")
+        .value,
+
+      description:
+        document
+        .getElementById("projectDescription")
+        .value
+        .trim()
+
+    },
+
+    "projectMessage"
+
+  );
+
+};
+
+
+onSnapshot(
+  projectsRef,
+  snapshot => {
+
+    const list =
+      document
+      .getElementById("projectList");
+
+    list.innerHTML = "";
+
+
+    snapshot.forEach(item => {
+
+      const data =
+        item.data();
+
+
+      list.innerHTML += `
+
+      <div class="item-box">
+
+        <div class="item-title">
+          📁 ${esc(data.projectName)}
+        </div>
+
+        <div class="details">
+
+          🏢 ${esc(data.companyName || "-")}
+          <br>
+
+          📍 ${esc(data.location || "-")}
+          <br>
+
+          📅 ${esc(data.date || "-")}
+          <br>
+
+          📝 ${esc(data.description || "-")}
+
+        </div>
+
+        <div class="actions">
+
+          <button
+          class="delete-btn"
+          onclick="del('projects','${item.id}')">
+
+            🗑 Delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    });
+
+
+    if(!snapshot.size){
+
+      list.innerHTML =
+        '<div class="empty">No projects added.</div>';
+
+    }
+
+  }
+);
+
+
+/* =========================
+   WORK ORDER
+========================= */
+
+document
+.getElementById("saveWorkOrderBtn")
+.onclick = () => {
+
+  save(
+
+    workOrdersRef,
+
+    {
+
+      companyName:
+        document
+        .getElementById("woCompanyName")
+        .value
+        .trim(),
+
+      projectName:
+        document
+        .getElementById("woProjectName")
+        .value
+        .trim(),
+
+      orderNumber:
+        document
+        .getElementById("orderNumber")
+        .value
+        .trim(),
+
+      location:
+        document
+        .getElementById("woLocation")
+        .value
+        .trim(),
+
+      date:
+        document
+        .getElementById("woDate")
+        .value,
+
+      pdfUrl:
+        document
+        .getElementById("pdfUrl")
+        .value
+        .trim(),
+
+      description:
+        document
+        .getElementById("woDescription")
+        .value
+        .trim()
+
+    },
+
+    "workOrderMessage"
+
+  );
+
+};
+
+
+onSnapshot(
+  workOrdersRef,
+  snapshot => {
+
+    const list =
+      document
+      .getElementById("workOrderList");
+
+    list.innerHTML = "";
+
+
+    snapshot.forEach(item => {
+
+      const data =
+        item.data();
+
+
+      const pdfButton =
+        data.pdfUrl
+        ? `
+          <button
+          class="view-btn"
+          onclick="openURL('${safe(data.pdfUrl)}')">
+
+            📄 View PDF
+
+          </button>
+        `
+        : "";
+
+
+      list.innerHTML += `
+
+      <div class="item-box">
+
+        <div class="item-title">
+          📄 Work Order
+        </div>
+
+        <div class="details">
+
+          🏢 ${esc(data.companyName || "-")}
+          <br>
+
+          📁 ${esc(data.projectName || "-")}
+          <br>
+
+          🔢 ${esc(data.orderNumber || "-")}
+          <br>
+
+          📍 ${esc(data.location || "-")}
+          <br>
+
+          📅 ${esc(data.date || "-")}
+          <br>
+
+          📝 ${esc(data.description || "-")}
+
+        </div>
+
+        <div class="actions">
+
+          ${pdfButton}
+
+          <button
+          class="delete-btn"
+          onclick="del('workOrders','${item.id}')">
+
+            🗑 Delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    });
+
+
+    if(!snapshot.size){
+
+      list.innerHTML =
+        '<div class="empty">No Work Orders added.</div>';
+
+    }
+
+  }
+);
+
+
+/* =========================
+   CERTIFICATE
+========================= */
+
+document
+.getElementById("saveCertificateBtn")
+.onclick = () => {
+
+  save(
+
+    certificatesRef,
+
+    {
+
+      companyName:
+        document
+        .getElementById("certCompanyName")
+        .value
+        .trim(),
+
+      projectName:
+        document
+        .getElementById("certProjectName")
+        .value
+        .trim(),
+
+      certificateNumber:
+        document
+        .getElementById("certificateNumber")
+        .value
+        .trim(),
+
+      date:
+        document
+        .getElementById("certDate")
+        .value,
+
+      fileUrl:
+        document
+        .getElementById("certificateFileUrl")
+        .value
+        .trim(),
+
+      description:
+        document
+        .getElementById("certDescription")
+        .value
+        .trim()
+
+    },
+
+    "certificateMessage"
+
+  );
+
+};
+
+
+onSnapshot(
+  certificatesRef,
+  snapshot => {
+
+    const list =
+      document
+      .getElementById("certificateList");
+
+    list.innerHTML = "";
+
+
+    snapshot.forEach(item => {
+
+      const data =
+        item.data();
+
+
+      const viewButton =
+        data.fileUrl
+        ? `
+          <button
+          class="view-btn"
+          onclick="openURL('${safe(data.fileUrl)}')">
+
+            🏆 View
+
+          </button>
+        `
+        : "";
+
+
+      list.innerHTML += `
+
+      <div class="item-box">
+
+        <div class="item-title">
+
+          🏆 ${esc(
+            data.certificateNumber ||
+            "Certificate"
+          )}
+
+        </div>
+
+        <div class="details">
+
+          🏢 ${esc(data.companyName || "-")}
+          <br>
+
+          📁 ${esc(data.projectName || "-")}
+          <br>
+
+          📅 ${esc(data.date || "-")}
+          <br>
+
+          📝 ${esc(data.description || "-")}
+
+        </div>
+
+        <div class="actions">
+
+          ${viewButton}
+
+          <button
+          class="delete-btn"
+          onclick="del('certificates','${item.id}')">
+
+            🗑 Delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    });
+
+
+    if(!snapshot.size){
+
+      list.innerHTML =
+        '<div class="empty">No Certificates added.</div>';
+
+    }
+
+  }
+);
+
+
+/* =========================
+   CLOUDINARY UPLOAD
+========================= */
+
+async function uploadFile(
+  file,
+  type,
+  title,
+  statusId
+){
+
+  if(!auth.currentUser){
+
+    alert(
+      "पहले Admin Login करें।"
+    );
+
+    return;
+  }
+
+
+  if(!file){
+
+    alert(
+      "File select करें।"
+    );
+
+    return;
+  }
+
+
+  const box =
+    document.getElementById(statusId);
+
+
+  box.innerHTML =
+    '<div class="success-box">⏳ Upload शुरू हो रहा है...</div>';
+
+
+  let resource = "image";
+
+
+  if(type === "videos"){
+
+    resource = "video";
+
+  }
+
+
+  if(type === "certificates"){
+
+    resource = "raw";
+
+  }
+
+
+  const url =
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resource}/upload`;
+
+
+  const form =
+    new FormData();
+
+
+  form.append(
+    "file",
+    file
+  );
+
+
+  form.append(
+    "upload_preset",
+    UPLOAD_PRESET
+  );
+
+
+  const xhr =
+    new XMLHttpRequest();
+
+
+  xhr.open(
+    "POST",
+    url
+  );
+
+
+  xhr.upload.onprogress =
+    event => {
+
+      if(event.lengthComputable){
+
+        const percent =
+          Math.round(
+            event.loaded /
+            event.total *
+            100
+          );
+
+
+        box.innerHTML = `
+
+          <div class="success-box">
+
+            ⬆️ Uploading...
+            ${percent}%
+
+          </div>
+
+          <div class="progress">
+
+            <div
+            class="progress-bar"
+            style="width:${percent}%">
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+    };
+
+
+  xhr.onload = async () => {
+
+    if(
+      xhr.status >= 200 &&
+      xhr.status < 300
+    ){
+
+      try{
+
+        const result =
+          JSON.parse(
+            xhr.responseText
+          );
+
+
+        await addDoc(
+
+          mediaRef,
+
+          {
+
+            type:
+
+              type,
+
+            title:
+
+              title ||
+              file.name,
+
+            fileName:
+
+              file.name,
+
+            fileUrl:
+
+              result.secure_url,
+
+            publicId:
+
+              result.public_id ||
+              "",
+
+            contentType:
+
+              file.type,
+
+            size:
+
+              file.size,
+
+            createdAt:
+
+              serverTimestamp()
+
+          }
+
+        );
+
+
+        box.innerHTML =
+          '<div class="success-box">✅ Cloudinary upload successfully complete.</div>';
+
+
+      }catch(error){
+
+        box.innerHTML =
+          '<div class="error-box">❌ Firebase Error: ' +
+          esc(error.message) +
+          '</div>';
+
+      }
+
+    }else{
+
+      let message =
+        "Cloudinary upload failed.";
+
+
+      try{
+
+        const result =
+          JSON.parse(
+            xhr.responseText
+          );
+
+
+        if(
+          result.error &&
+          result.error.message
+        ){
+
+          message =
+            result.error.message;
+
+        }
+
+      }catch(error){
+
+        console.error(
+          error
+        );
+
+      }
+
+
+      box.innerHTML =
+        '<div class="error-box">❌ Cloudinary Error: ' +
+        esc(message) +
+        '</div>';
+
+    }
+
+  };
+
+
+  xhr.onerror = () => {
+
+    box.innerHTML =
+      '<div class="error-box">❌ Network Error. Internet check करें।</div>';
+
+  };
+
+
+  xhr.send(form);
+
+}
+
+
+/* =========================
+   UPLOAD BUTTONS
+========================= */
+
+document
+.getElementById("uploadPhotoBtn")
+.onclick = () => {
+
+  const file =
+    document
+    .getElementById("photoFile")
+    .files[0];
+
+
+  const title =
+    document
+    .getElementById("photoTitle")
+    .value
+    .trim();
+
+
+  uploadFile(
+    file,
+    "photos",
+    title,
+    "photoUploadStatus"
+  );
+
+};
+
+
+document
+.getElementById("uploadVideoBtn")
+.onclick = () => {
+
+  const file =
+    document
+    .getElementById("videoFile")
+    .files[0];
+
+
+  const title =
+    document
+    .getElementById("videoTitle")
+    .value
+    .trim();
+
+
+  uploadFile(
+    file,
+    "videos",
+    title,
+    "videoUploadStatus"
+  );
+
+};
+
+
+document
+.getElementById("uploadCertificateBtn")
+.onclick = () => {
+
+  const file =
+    document
+    .getElementById("certificateFile")
+    .files[0];
+
+
+  const title =
+    document
+    .getElementById("uploadCertTitle")
+    .value
+    .trim();
+
+
+  uploadFile(
+    file,
+    "certificates",
+    title,
+    "certificateUploadStatus"
+  );
+
+};
+
+
+/* =========================
+   MEDIA
+========================= */
+
+onSnapshot(
+  mediaRef,
+  snapshot => {
+
+    const adminList =
+      document
+      .getElementById("adminMediaList");
+
+    const publicPhotos =
+      document
+      .getElementById("publicPhotos");
+
+    const publicVideos =
+      document
+      .getElementById("publicVideos");
+
+    const publicCertificates =
+      document
+      .getElementById("publicCertificates");
+
+
+    adminList.innerHTML = "";
+
+    publicPhotos.innerHTML = "";
+
+    publicVideos.innerHTML = "";
+
+    publicCertificates.innerHTML = "";
+
+
+    let photoCount = 0;
+
+    let videoCount = 0;
+
+    let certificateCount = 0;
+
+
+    snapshot.forEach(item => {
+
+      const data =
+        item.data();
+
+
+      if(!data.fileUrl){
+
+        return;
+
+      }
+
+
+      let icon = "🏆";
+
+
+      if(data.type === "photos"){
+
+        icon = "📸";
+
+      }
+
+      if(data.type === "videos"){
+
+        icon = "🎥";
+
+      }
+
+
+      adminList.innerHTML += `
+
+        <div class="file-card">
+
+          <h3>
+
+            ${icon}
+            ${esc(
+              data.title ||
+              data.fileName ||
+              "Media"
+            )}
+
+          </h3>
+
+          <div class="small">
+
+            ${esc(
+              data.fileName ||
+              ""
+            )}
+
+          </div>
+
+          <div class="actions">
+
+            <button
+            class="view-btn"
+            onclick="openURL('${safe(data.fileUrl)}')">
+
+              👁 View
+
+            </button>
+
+            <button
+            class="delete-btn"
+            onclick="del('media','${item.id}')">
+
+              🗑 Delete
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      /* PHOTO */
+
+      if(data.type === "photos"){
+
+        photoCount++;
+
+
+        if(
+          !publicPhotos
+          .querySelector(".gallery")
+        ){
+
+          publicPhotos.innerHTML =
+            '<div class="gallery"></div>';
+
+        }
+
+
+        publicPhotos
+        .querySelector(".gallery")
+        .innerHTML += `
+
+          <div class="gallery-item">
+
+            <img
+            src="${safe(data.fileUrl)}"
+            loading="lazy">
+
+            <div class="gallery-info">
+
+              <b>
+                ${esc(
+                  data.title ||
+                  "RAJ ELECTRIC"
+                )}
+              </b>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /* VIDEO */
+
+      if(data.type === "videos"){
+
+        videoCount++;
+
+
+        if(
+          !publicVideos
+          .querySelector(".gallery")
+        ){
+
+          publicVideos.innerHTML =
+            '<div class="gallery"></div>';
+
+        }
+
+
+        publicVideos
+        .querySelector(".gallery")
+        .innerHTML += `
+
+          <div class="gallery-item">
+
+            <video
+            controls
+            preload="metadata">
+
+              <source
+              src="${safe(data.fileUrl)}">
+
+            </video>
+
+            <div class="gallery-info">
+
+              <b>
+                ${esc(
+                  data.title ||
+                  "RAJ ELECTRIC Video"
+                )}
+              </b>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /* CERTIFICATE */
+
+      if(data.type === "certificates"){
+
+        certificateCount++;
+
+
+        publicCertificates.innerHTML += `
+
+          <div class="file-card">
+
+            <h3>
+
+              🏆
+              ${esc(
+                data.title ||
+                "Certificate"
+              )}
+
+            </h3>
+
+            <button
+            class="view-btn"
+            onclick="openURL('${safe(data.fileUrl)}')">
+
+              👁 View Certificate
+
+            </button>
+
+          </div>
+
+        `;
+
+      }
+
+    });
+
+
+    if(!photoCount){
+
+      publicPhotos.innerHTML =
+        '<div class="empty">📸 अभी कोई photo upload नहीं हुई है।</div>';
+
+    }
+
+
+    if(!videoCount){
+
+      publicVideos.innerHTML =
+        '<div class="empty">🎥 अभी कोई video upload नहीं हुई है।</div>';
+
+    }
+
+
+    if(!certificateCount){
+
+      publicCertificates.innerHTML =
+        '<div class="empty">🏆 अभी कोई certificate upload नहीं हुआ है।</div>';
+
+    }
+
+  }
+);
+
+
+/* =========================
+   DELETE
+========================= */
+
+window.del =
+async (
+  collectionName,
+  id
+) => {
+
+  if(!auth.currentUser){
+
+    alert(
+      "पहले Admin Login करें।"
+    );
+
+    return;
+  }
+
+
+  if(
+    !confirm(
+      "Delete करना है?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        collectionName,
+        id
+      )
+    );
+
+
+  }catch(error){
+
+    alert(
+      "Delete Error: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================
+   OPEN URL
+========================= */
+
+window.openURL = url => {
+
+  if(!url || url === "#"){
+
+    alert(
+      "Valid URL उपलब्ध नहीं है।"
+    );
+
+    return;
+  }
+
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+};
+
+
+/* =========================
+   SECURITY HELPERS
+========================= */
+
+function esc(value){
+
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+function safe(url){
+
+  try{
+
+    const parsed =
+      new URL(url);
+
+
+    if(
+      parsed.protocol === "https:" ||
+      parsed.protocol === "http:"
+    ){
+
+      return url
+      .replace(
+        /'/g,
+        "%27"
+      );
+
+    }
+
+
+    return "#";
+
+
+  }catch(error){
+
+    return "#";
+
+  }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+console.log(
+  "RAJ ELECTRIC + Firebase + Cloudinary Started"
+);
+
+console.log(
+  "Cloud Name:",
+  CLOUD_NAME
+);
+
+</script>
+
+</body>
+</html>
